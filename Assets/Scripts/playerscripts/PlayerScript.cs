@@ -58,9 +58,9 @@ public class PlayerScript : MonoBehaviour
             anim.SetBool ("isJumping", true);
 
         }
+       
 
-
-        lives = 5;
+            lives = 5;
         float xvel, yvel;
 
         xvel = rb.linearVelocity.x;
@@ -68,7 +68,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKey("d"))
         {
-            xvel = 8;
+            xvel = 7;
             bool faceLeft = false;
         }
         else
@@ -78,7 +78,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKey("a"))
         {
-            xvel = -8;
+            xvel = -7;
             bool faceLeft = true;
         }
 
@@ -94,10 +94,10 @@ public class PlayerScript : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt) || (Input.GetKeyDown(KeyCode.Space)))
+        if (Input.GetKeyDown(KeyCode.LeftAlt) || (Input.GetKeyDown(KeyCode.Space) && isGrounded))
         {
             
-                yvel = 7;
+                yvel = 6.5f;
                 print("do jump");
             
         }
@@ -131,7 +131,7 @@ public class PlayerScript : MonoBehaviour
             isGrounded = false;
         }
 
-
+        
 
     }
 
@@ -163,6 +163,7 @@ public class PlayerScript : MonoBehaviour
     }
 
 
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         print("tag=" + col.gameObject.tag);
@@ -173,7 +174,16 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-
+     
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("coin"))
+        {
+            Destroy(other.gameObject);
+            cm.coinCount++;
+        }
+                
+    }
 }
 
 

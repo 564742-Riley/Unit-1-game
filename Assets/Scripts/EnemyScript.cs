@@ -29,7 +29,7 @@ public class enemyscript : MonoBehaviour
         {
             print("I am moving left");
 
-            if (ExtendedRayCollisionCheck(-0.5f, 0) == false)
+            if (ExtendedRayCollisionCheck(-0.5f, -1) == false)
             {
                 xvel = 5;
                 gameObject.transform.localScale = new Vector3(1, 1, 1);
@@ -40,7 +40,7 @@ public class enemyscript : MonoBehaviour
         {
             print("I am moving right");
 
-            if (ExtendedRayCollisionCheck(0.6f, 0) == false)
+            if (ExtendedRayCollisionCheck(0.6f, -1) == false)
             {
                 xvel = -5;
                 gameObject.transform.localScale = new Vector3(-1, 1, 1);
