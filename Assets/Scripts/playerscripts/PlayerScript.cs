@@ -51,25 +51,28 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKey("space"))
-        {
-            helper.DoFlipObject(true);
-            anim.SetBool ("isJumping", true);
-
-        }
-       
-
-            lives = 5;
         float xvel, yvel;
+        bool faceLeft = false;
 
+
+        lives = 5;
         xvel = rb.linearVelocity.x;
         yvel = rb.linearVelocity.y;
+
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt) || (Input.GetKeyDown(KeyCode.Space) && isGrounded))
+        {
+            yvel = 6.5f;
+            print("do jump");
+            anim.SetBool("isJumping", true);
+        }
+
+
+
 
         if (Input.GetKey("d"))
         {
             xvel = 7;
-            bool faceLeft = false;
         }
         else
         {
@@ -79,7 +82,6 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKey("a"))
         {
             xvel = -7;
-            bool faceLeft = true;
         }
 
 
@@ -94,18 +96,7 @@ public class PlayerScript : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt) || (Input.GetKeyDown(KeyCode.Space) && isGrounded))
-        {
-            
-                yvel = 6.5f;
-                print("do jump");
-            
-        }
 
-
-
-
-        rb.linearVelocity = new Vector3(xvel, yvel, 0);
 
 
         //flip sprite
@@ -117,7 +108,18 @@ public class PlayerScript : MonoBehaviour
         {
             helper.DoFlipObject(true);
         }
-        rb.linearVelocity = new Vector3(xvel, yvel, 0);
+
+
+
+
+        //check for landing back on ground
+
+        if( yvel < 0 && isGrounded )
+        {
+            anim.SetBool("isJumping", false);
+
+        }
+
 
 
 
@@ -131,7 +133,8 @@ public class PlayerScript : MonoBehaviour
             isGrounded = false;
         }
 
-        
+
+        rb.linearVelocity = new Vector3(xvel, yvel, 0);
 
     }
 
