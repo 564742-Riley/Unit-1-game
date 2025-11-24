@@ -62,7 +62,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftAlt) || (Input.GetKeyDown(KeyCode.Space) && isGrounded))
         {
-            yvel = 6.5f;
+            yvel = 7;
             print("do jump");
             anim.SetBool("isJumping", true);
         }
